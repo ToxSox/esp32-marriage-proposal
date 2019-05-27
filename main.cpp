@@ -32,40 +32,15 @@
 // For a connection via I2C using Wire include
 #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
 #include "SSD1306Wire.h" // legacy include: `#include "SSD1306.h"`
-// or #include "SH1106Wire.h", legacy include: `#include "SH1106.h"`
-// For a connection via I2C using brzo_i2c (must be installed) include
-// #include <brzo_i2c.h> // Only needed for Arduino 1.6.5 and earlier
-// #include "SSD1306Brzo.h"
-// #include "SH1106Brzo.h"
-// For a connection via SPI include
-// #include <SPI.h> // Only needed for Arduino 1.6.5 and earlier
-// #include "SSD1306Spi.h"
-// #include "SH1106SPi.h"
 
 // Include custom images
 #include "images.h"
 #include "font.h"
 
-// Initialize the OLED display using SPI
-// D5 -> CLK
-// D7 -> MOSI (DOUT)
-// D0 -> RES
-// D2 -> DC
-// D8 -> CS
-// SSD1306Spi        display(D0, D2, D8);
-// or
-// SH1106Spi         display(D0, D2);
 
-// Initialize the OLED display using brzo_i2c
-// D3 -> SDA
-// D5 -> SCL
-// SSD1306Brzo display(0x3c, D3, D5);
-// or
-// SH1106Brzo  display(0x3c, D3, D5);
 
 // Initialize the OLED display using Wire library
 SSD1306Wire  display(0x3c, 5, 4);
-// SH1106 display(0x3c, D3, D5);
 
 
 #define DEMO_DURATION 6000
@@ -85,9 +60,7 @@ void setup() {
 
   //display.flipScreenVertically();
   display.setFont(Lato_Regular_16);
-
 }
-
 
 void drawProgressBarDemo() {
   if(counter > 500) {
@@ -112,15 +85,11 @@ void drawProgressBarDemo() {
 }
 
 void imageRings() {
-    // see http://blog.squix.org/2015/05/esp8266-nodemcu-how-to-create-xbm.html
-    // on how to create xbm files
-    display.drawXbm(16, 0, WiFi_Logo_width, WiFi_Logo_height, WiFi_Logo_bits);
+    display.drawXbm(16, 0, Rings_width, Rings_height, Rings_bits);
 }
 
 void imagePic() {
-    // see http://blog.squix.org/2015/05/esp8266-nodemcu-how-to-create-xbm.html
-    // on how to create xbm files
-    display.drawXbm(16, 0, Bild_width, Bild_height, Bild_bits);
+    display.drawXbm(16, 0, Pic_width, Pic_height, Pic_bits);
 }
 
 Demo demos[] = {drawProgressBarDemo,imagePic,imageRings};
